@@ -1,4 +1,5 @@
 # ecommerece_riverpod
+- Clean Architecture.
 
 A new Flutter project.
 
