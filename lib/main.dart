@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/router/router_config.dart';
+import 'core/theme/theme_provider.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -12,13 +13,17 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final themeMode = ref.watch(themeProvider).themeMode;
+
     return MaterialApp.router(
       title: 'ecommerce',
       debugShowCheckedModeBanner: false,
       routerConfig: ref.read(goRouterProvider),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark().copyWith(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.amber.shade700))),
+      themeMode: themeMode,
     );
   }
 }

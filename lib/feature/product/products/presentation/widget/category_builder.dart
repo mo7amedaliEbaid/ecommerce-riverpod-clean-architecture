@@ -9,6 +9,7 @@ class _CategoryBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final theme = ref.watch(themeProvider);
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 16,
@@ -29,7 +30,9 @@ class _CategoryBuilder extends ConsumerWidget {
                 vertical: 5,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: theme.themeMode == ThemeMode.light
+                    ? Colors.grey[200]
+                    : Colors.amber.shade700,
                 border: ref.watch(selectedCategoryProvider) == categories[index]
                     ? Border.all(
                         color: Colors.blue,
@@ -40,6 +43,10 @@ class _CategoryBuilder extends ConsumerWidget {
               child: Center(
                 child: Text(
                   categories[index].toUpperCase(),
+                  style: TextStyle(
+                      color: theme.themeMode == ThemeMode.light
+                          ? Colors.black
+                          : Colors.white),
                 ),
               ),
             ),
