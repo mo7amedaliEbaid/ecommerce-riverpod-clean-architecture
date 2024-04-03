@@ -14,15 +14,19 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final themeMode = ref.watch(themeProvider).themeMode;
+   // final theme = ref.watch(themeProvider);
 
     return MaterialApp.router(
       title: 'ecommerce',
       debugShowCheckedModeBanner: false,
       routerConfig: ref.read(goRouterProvider),
-      theme: ThemeData.light(),
+      theme: themeMode == ThemeMode.light
+          ? ThemeData.light()
+          : ThemeData.dark(),
       darkTheme: ThemeData.dark().copyWith(
           elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.amber.shade700))),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber.shade700))),
       themeMode: themeMode,
     );
   }
